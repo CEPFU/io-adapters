@@ -7,8 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import de.fu_berlin.agdb.crepe.core.Tag;
 
@@ -22,7 +22,7 @@ public class FileLoader implements ILoader {
 	private String path;
 	private StringBuilder text;
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger logger = LogManager.getLogger(FileLoader.class);
 	
 	/**
 	 * Loads text from a local file.

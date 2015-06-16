@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import de.fu_berlin.agdb.crepe.core.Tag;
 
@@ -22,7 +22,7 @@ public class URLLoader implements ILoader {
 	private String text;
 	private URL url;
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger logger = LogManager.getLogger(URLLoader.class);
 	
 	/**
 	 * Loader for any file that can be loaded with an URL (e.g. via HTTP).

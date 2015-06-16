@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import de.fu_berlin.agdb.crepe.core.Tag;
 import de.fu_berlin.agdb.crepe.data.Attribute;
@@ -34,7 +34,7 @@ public class CSVInputAdapter implements IInputAdapter {
 	private String delimiter;
 	private Constructor<?>[] columnTypes = null;
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger logger = LogManager.getLogger(CSVInputAdapter.class);
 	
 	/**
 	 * InputAdapter for CSV files.

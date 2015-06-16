@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /**
  * Simple file writer.
@@ -22,7 +22,7 @@ public class FileWriter implements IWriter {
 	private String path;
 	private boolean append = false;
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger logger = LogManager.getLogger(FileWriter.class);
 	
 	/**
 	 * Writes output to a text file. UTF-8 encoding is used.
