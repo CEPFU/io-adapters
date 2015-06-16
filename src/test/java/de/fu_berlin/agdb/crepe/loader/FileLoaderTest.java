@@ -3,13 +3,10 @@
  */
 package de.fu_berlin.agdb.crepe.loader;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
-import de.fu_berlin.agdb.crepe.loader.FileLoader;
-import de.fu_berlin.agdb.crepe.loader.ILoader;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for File loader.
@@ -18,7 +15,7 @@ import de.fu_berlin.agdb.crepe.loader.ILoader;
  */
 public class FileLoaderTest {
 
-	private final static String path = "testData/use_case_finance/data/euro_dollar.csv";
+	private final static String resource_path = "";
 	private final static String expectedText = "Datum;Kurs\n" + 
 			"1999-01-04;1.1789\n" + 
 			"1999-01-05;1179\n" + 
@@ -45,9 +42,9 @@ public class FileLoaderTest {
 	 */
 	@Test
 	public void test() {
-
-		ILoader loader = new FileLoader("testData/unitTestData/loaders/fileLoader.csv");
-		assertTrue("Can't load " + path, loader.load());
+        String file = getClass().getResource(resource_path).getFile();
+        ILoader loader = new FileLoader(file);
+		assertTrue("Can't load " + file, loader.load());
 		assertEquals("Loaded text doesn't match expected text.", expectedText, loader.getText());
 	}
 
