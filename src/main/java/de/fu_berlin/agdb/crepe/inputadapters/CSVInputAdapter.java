@@ -5,12 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -31,6 +26,7 @@ public class CSVInputAdapter implements IInputAdapter {
 	private List<IEvent> events;
 	private String timeStampCaption;
 	private String timeStampFormat;
+	private Locale timeStampLocale = Locale.ENGLISH;
 	private String delimiter;
 	private Constructor<?>[] columnTypes = null;
 	
@@ -157,7 +153,7 @@ public class CSVInputAdapter implements IInputAdapter {
 				// time stamp
 				else {
 
-					DateFormat df = new SimpleDateFormat(this.timeStampFormat);
+					DateFormat df = new SimpleDateFormat(this.timeStampFormat, timeStampLocale);
 					try {
 						curEvent.setTimeStamp(df.parse(token));
 					} catch (ParseException e) {
@@ -191,5 +187,13 @@ public class CSVInputAdapter implements IInputAdapter {
 	public void load(String text) {
 	
 		this.parseCSV(text);
+	}
+
+	public Locale getTimeStampLocale() {
+		return timeStampLocale;
+	}
+
+	public void setTimeStampLocale(Locale timeStampLocale) {
+		this.timeStampLocale = timeStampLocale;
 	}
 }

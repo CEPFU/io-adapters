@@ -29,6 +29,7 @@ import java.util.*;
 public class RSSInputAdapter implements IInputAdapter {
 
     private List<IEvent> events;
+    private Locale timeStampLocale = Locale.ENGLISH;
 
     /**
      * Construct RSSEvents from XML-Text.
@@ -92,7 +93,7 @@ public class RSSInputAdapter implements IInputAdapter {
 
             // special case is pubDate which represents the time stamp
             if (tag.equalsIgnoreCase("pubDate")) {
-                DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+                DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", timeStampLocale);
                 try {
                     timeStamp = df.parse(text);
                 } catch (ParseException e) {
@@ -127,5 +128,13 @@ public class RSSInputAdapter implements IInputAdapter {
     public void load(String text) {
 
         this.parseXML(text);
+    }
+
+    public Locale getTimeStampLocale() {
+        return timeStampLocale;
+    }
+
+    public void setTimeStampLocale(Locale timeStampLocale) {
+        this.timeStampLocale = timeStampLocale;
     }
 }
