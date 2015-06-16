@@ -3,24 +3,19 @@
  */
 package de.fu_berlin.agdb.crepe.outputadapters;
 
-import static org.junit.Assert.*;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import de.fu_berlin.agdb.crepe.data.Attribute;
 import de.fu_berlin.agdb.crepe.data.Event;
 import de.fu_berlin.agdb.crepe.data.IAttribute;
 import de.fu_berlin.agdb.crepe.data.IEvent;
-import de.fu_berlin.agdb.crepe.outputadapters.CSVOutputAdapter;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Ralf Oechsner
@@ -40,7 +35,7 @@ public class CSVOutputAdapterTest {
 	 */
 	private void addTestEvent(String time, String temperature, String humidity) throws ParseException {
 	
-		DateFormat df = new SimpleDateFormat(timeStampFormat);
+		DateFormat df = new SimpleDateFormat(timeStampFormat, Locale.ENGLISH);
 		
 		Event event = new Event();
 		event.setTimeStamp(df.parse(time));

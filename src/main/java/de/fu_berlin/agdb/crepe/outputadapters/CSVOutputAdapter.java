@@ -3,13 +3,14 @@
  */
 package de.fu_berlin.agdb.crepe.outputadapters;
 
+import de.fu_berlin.agdb.crepe.data.IAttribute;
+import de.fu_berlin.agdb.crepe.data.IEvent;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.TreeSet;
-
-import de.fu_berlin.agdb.crepe.data.IAttribute;
-import de.fu_berlin.agdb.crepe.data.IEvent;
 
 /**
  * CSVOutputAdapter. Writes events to CSV format.
@@ -20,6 +21,7 @@ public class CSVOutputAdapter implements IOutputAdapter {
 
 	private String timeStampCaption;
 	private String timeStampFormat;
+	private Locale timeStampLocale = Locale.ENGLISH;
 	private String delimiter;
 	private String output;
 	private String[] captions = null;
@@ -37,7 +39,7 @@ public class CSVOutputAdapter implements IOutputAdapter {
 		
 		this.timeStampCaption = timeStampCaption;
 		this.timeStampFormat = timeStampFormat;
-		this.dateFormat = new SimpleDateFormat(this.timeStampFormat);
+		this.dateFormat = new SimpleDateFormat(this.timeStampFormat, timeStampLocale);
 		this.delimiter = delimiter;
 	}
 	
@@ -132,5 +134,13 @@ public class CSVOutputAdapter implements IOutputAdapter {
 		return s + ")";
 	}
 
-	
+
+	public Locale getTimeStampLocale() {
+		return timeStampLocale;
+	}
+
+	public void setTimeStampLocale(Locale timeStampLocale) {
+		this.timeStampLocale = timeStampLocale;
+		this.dateFormat = new SimpleDateFormat(timeStampFormat, timeStampLocale);
+	}
 }
