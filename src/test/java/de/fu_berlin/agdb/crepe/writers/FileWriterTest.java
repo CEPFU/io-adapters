@@ -1,22 +1,11 @@
-/**
- * 
- */
 package de.fu_berlin.agdb.crepe.writers;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Test;
 
-import de.fu_berlin.agdb.crepe.writers.FileWriter;
+import java.io.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Test for FileWriter.
