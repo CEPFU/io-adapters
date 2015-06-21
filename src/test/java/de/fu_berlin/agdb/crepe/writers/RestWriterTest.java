@@ -17,7 +17,6 @@ public class RestWriterTest {
     @Before
     public void setUp() throws Exception {
         // This currently requires the crepe rest service to be running
-        // TODO: Choose another service?
         writer = RestWriter.makeStdWriter(URI.create("http://localhost:8080/event"));
     }
 

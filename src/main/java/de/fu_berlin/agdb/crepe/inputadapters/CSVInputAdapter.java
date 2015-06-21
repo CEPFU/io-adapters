@@ -70,7 +70,6 @@ public class CSVInputAdapter implements IInputAdapter {
 			} catch (NoSuchMethodException e) {
 				logger.debug("CSVInputAdapter: Type of column " + i + " has no constructor with String as parameter! Falling back to type String.");
 			} catch (SecurityException e) {
-				// TODO: when does this happen?
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
 				logger.debug("CSVInputAdapter: Type of column " + i + " cannot be found! Falling back to type String.");
@@ -102,7 +101,7 @@ public class CSVInputAdapter implements IInputAdapter {
 			
 			String token = st.nextToken();
 			if (!token.equals(this.timeStampCaption)) {
-				keys.add(token);  // TODO: check on duplicate entries
+				keys.add(token);
 			}
 			else {
 				timeStampCol = col;
@@ -157,7 +156,6 @@ public class CSVInputAdapter implements IInputAdapter {
 					try {
 						curEvent.setTimeStamp(df.parse(token));
 					} catch (ParseException e) {
-						// wrong format so ignored TODO: what then?
 						e.printStackTrace();
 					}
 				}
