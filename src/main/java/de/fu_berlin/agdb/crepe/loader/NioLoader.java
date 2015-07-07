@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import de.fu_berlin.agdb.crepe.core.Tag;
 import de.fu_berlin.agdb.nio_tools.AConnectionHandler;
 import de.fu_berlin.agdb.nio_tools.NioClient;
 
@@ -16,10 +17,10 @@ public class NioLoader extends AConnectionHandler implements ILoader {
 	
 	private ArrayList<String> accumulatedEvents;
 	
-	public NioLoader(String host, int port) throws IOException {
+	public NioLoader(@Tag("port") String port, @Tag("host") String host) throws IOException {
 		accumulatedEvents = new ArrayList<String>();
 		
-		NioClient nioClient = new NioClient("10.10.10.50", 9977, this);
+		NioClient nioClient = new NioClient(host, Integer.parseInt(port), this);
 		Thread thread = new Thread(nioClient);
 		thread.start();		
 	}

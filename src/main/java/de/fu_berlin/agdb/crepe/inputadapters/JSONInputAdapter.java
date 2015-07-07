@@ -24,34 +24,27 @@ public class JSONInputAdapter implements IInputAdapter{
 	
 	@Override
 	public void load(String text) {
-		JSONArray eventArray = new JSONArray(text);
-		for(int i = 0; i < eventArray.length(); i++){
-			JSONObject arrayEntry = eventArray.getJSONObject(i);
-			
-			Map<String, IAttribute> attributes = new HashMap<String, IAttribute>();
-			attributes.put("date", new Attribute(arrayEntry.getString("stationId")));
-			attributes.put("windChill", new Attribute(arrayEntry.getDouble("windChill")));
-			attributes.put("windDirection", new Attribute(arrayEntry.getDouble("windDirection")));
-			attributes.put("windSpeed", new Attribute(arrayEntry.getDouble("windSpeed")));
-			attributes.put("atmosphereHumidity", new Attribute(arrayEntry.getDouble("atmosphereHumidity")));
-			attributes.put("atmospherePressure", new Attribute(arrayEntry.getDouble("atmospherePressure")));
-			attributes.put("atmosphereRising", new Attribute(arrayEntry.getDouble("atmosphereRising")));
-			attributes.put("atmosphereVisibility", new Attribute(arrayEntry.getDouble("atmosphereVisibility")));
-			attributes.put("astronomySunrise", new Attribute(arrayEntry.getString("astronomySunrise")));
-			attributes.put("astronomySunset", new Attribute(arrayEntry.getString("astronomySunset")));
-			attributes.put("temperature", new Attribute(arrayEntry.getDouble("temperature")));
-			addStationMetaDataAttributes(arrayEntry.getJSONObject("stationMetaData"), attributes);
-			events.add(new Event(new Date(arrayEntry.getLong("timestamp")), attributes));
-			
-			JSONArray forecastEntryArray = arrayEntry.getJSONArray("forecastEntrys");
-			for(int ii = 0; ii < forecastEntryArray.length(); i++){
-				JSONObject forecastArrayEntry = forecastEntryArray.getJSONObject(i);
+		if(text != null){
+			JSONArray eventArray = new JSONArray(text);
+			for(int i = 0; i < eventArray.length(); i++){
+				JSONObject arrayEntry = eventArray.getJSONObject(i);
 				
-				Map<String, IAttribute> forecastEntrysAttributes = new HashMap<String, IAttribute>();
-				forecastEntrysAttributes.put("date", new Attribute(forecastArrayEntry.getString("date")));
-				forecastEntrysAttributes.put("high", new Attribute(forecastArrayEntry.getDouble("high")));
-				forecastEntrysAttributes.put("low", new Attribute(forecastArrayEntry.getDouble("low")));
-				addStationMetaDataAttributes(arrayEntry.getJSONObject("stationMetaData"), forecastEntrysAttributes);
+				Map<String, IAttribute> attributes = new HashMap<String, IAttribute>();
+				attributes.put("date", new Attribute(arrayEntry.getString("stationId")));
+				attributes.put("dataType", new Attribute(arrayEntry.getString("dataType")));
+				attributes.put("windChill", new Attribute(arrayEntry.getDouble("windChill")));
+				attributes.put("windDirection", new Attribute(arrayEntry.getDouble("windDirection")));
+				attributes.put("windSpeed", new Attribute(arrayEntry.getDouble("windSpeed")));
+				attributes.put("atmosphereHumidity", new Attribute(arrayEntry.getDouble("atmosphereHumidity")));
+				attributes.put("atmospherePressure", new Attribute(arrayEntry.getDouble("atmospherePressure")));
+				attributes.put("atmosphereRising", new Attribute(arrayEntry.getDouble("atmosphereRising")));
+				attributes.put("atmosphereVisibility", new Attribute(arrayEntry.getDouble("atmosphereVisibility")));
+				attributes.put("astronomySunrise", new Attribute(arrayEntry.getString("astronomySunrise")));
+				attributes.put("astronomySunset", new Attribute(arrayEntry.getString("astronomySunset")));
+				attributes.put("temperature", new Attribute(arrayEntry.getDouble("temperature")));
+				attributes.put("high", new Attribute(arrayEntry.getDouble("high")));
+				attributes.put("low", new Attribute(arrayEntry.getDouble("low")));
+				addStationMetaDataAttributes(arrayEntry.getJSONObject("stationMetaData"), attributes);
 				events.add(new Event(new Date(arrayEntry.getLong("timestamp")), attributes));
 			}
 		}
