@@ -2,6 +2,7 @@ package de.fu_berlin.agdb.crepe.data;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Interface for generic events (used for algebra).
@@ -28,4 +29,15 @@ public interface IEvent {
 	 * @return all attributes of the event
 	 */
 	public Map<String, IAttribute> getAttributes();
+
+	/**
+	 * Returns the value of the given attribute, if available.
+	 * @param attribute Name of the attribute.
+	 * @return An optional containing the attribute value, if it was available.
+	 */
+	public default Optional<Object> getAttributeValue(String attribute) {
+        return Optional.ofNullable(getAttributes())
+                .map((attributes) -> attributes.get(attribute))
+                .map(IAttribute::getValue);
+	}
 }
