@@ -30,8 +30,12 @@ public class JSONInputAdapter implements IInputAdapter{
 				JSONObject arrayEntry = eventArray.getJSONObject(i);
 				
 				Map<String, IAttribute> attributes = new HashMap<String, IAttribute>();
-				attributes.put("date", new Attribute(arrayEntry.getString("stationId")));
+				
+				attributes.put("timestamp", new Attribute(arrayEntry.getLong("timestamp")));
+				addStationMetaDataAttributes(arrayEntry.getJSONObject("stationMetaData"), attributes);
 				attributes.put("dataType", new Attribute(arrayEntry.getString("dataType")));
+				
+				attributes.put("date", new Attribute(arrayEntry.getString("date")));
 				attributes.put("windChill", new Attribute(arrayEntry.getDouble("windChill")));
 				attributes.put("windDirection", new Attribute(arrayEntry.getDouble("windDirection")));
 				attributes.put("windSpeed", new Attribute(arrayEntry.getDouble("windSpeed")));
@@ -42,9 +46,18 @@ public class JSONInputAdapter implements IInputAdapter{
 				attributes.put("astronomySunrise", new Attribute(arrayEntry.getString("astronomySunrise")));
 				attributes.put("astronomySunset", new Attribute(arrayEntry.getString("astronomySunset")));
 				attributes.put("temperature", new Attribute(arrayEntry.getDouble("temperature")));
-				attributes.put("high", new Attribute(arrayEntry.getDouble("high")));
-				attributes.put("low", new Attribute(arrayEntry.getDouble("low")));
-				addStationMetaDataAttributes(arrayEntry.getJSONObject("stationMetaData"), attributes);
+				attributes.put("temperatureHigh", new Attribute(arrayEntry.getDouble("temperatureHigh")));
+				attributes.put("temperatureLow", new Attribute(arrayEntry.getDouble("temperatureLow")));
+				
+				attributes.put("qualityLevel", new Attribute(arrayEntry.getInt("qualityLevel")));
+				attributes.put("steamPressure", new Attribute(arrayEntry.getDouble("steamPressure")));
+				attributes.put("cloudage", new Attribute(arrayEntry.getDouble("cloudage")));
+				attributes.put("minimumAirGroundTemperature", new Attribute(arrayEntry.getDouble("minimumAirGroundTemperature")));
+				attributes.put("maximumWindSpeed", new Attribute(arrayEntry.getDouble("maximumWindSpeed")));
+				attributes.put("precipitationDepth", new Attribute(arrayEntry.getDouble("precipitationDepth")));
+				attributes.put("sunshineDuration", new Attribute(arrayEntry.getDouble("sunshineDuration")));
+				attributes.put("snowHeight", new Attribute(arrayEntry.getDouble("snowHeight")));
+				
 				events.add(new Event(new Date(arrayEntry.getLong("timestamp")), attributes));
 			}
 		}
@@ -58,12 +71,14 @@ public class JSONInputAdapter implements IInputAdapter{
 	}
 	
 	private void addStationMetaDataAttributes(JSONObject stationMetaData, Map<String, IAttribute> attributes) {
+		attributes.put("locationId", new Attribute(stationMetaData.getLong("locationId")));
+		attributes.put("locationDescription", new Attribute(stationMetaData.getString("locationDescription")));
+		attributes.put("locationPosition", new Attribute(stationMetaData.getString("locationPosition")));
+		
 		attributes.put("stationId", new Attribute(stationMetaData.getLong("stationId")));
-		attributes.put("stationPosition", new Attribute(stationMetaData.getString("stationPosition")));
 		attributes.put("fromDate", new Attribute(stationMetaData.getString("fromDate")));
 		attributes.put("untilDate", new Attribute(stationMetaData.getString("untilDate")));
 		attributes.put("stationHeight", new Attribute(stationMetaData.getInt("stationHeight")));
-		attributes.put("stationName", new Attribute(stationMetaData.getString("stationName")));
 		attributes.put("federalState", new Attribute(stationMetaData.getString("federalState")));
 	}
 
