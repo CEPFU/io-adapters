@@ -18,4 +18,9 @@ public interface ILoader {
 	 * @return content of source.
 	 */
 	public String getText();
+	
+	/**
+	 * Indicates if the loader has more data
+	 */
+	public boolean hasMoreData();
 }

@@ -54,4 +54,9 @@ public class NioLoader extends AConnectionHandler implements ILoader {
 			}
 		}
 	}
+
+	@Override
+	public boolean hasMoreData() {
+		return true;
+	}
 }

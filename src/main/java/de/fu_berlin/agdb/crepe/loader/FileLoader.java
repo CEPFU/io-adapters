@@ -21,6 +21,7 @@ public class FileLoader implements ILoader {
 
 	private String path;
 	private StringBuilder text;
+	private boolean hasMoreData;
 	
 	private static Logger logger = LogManager.getLogger(FileLoader.class);
 	
@@ -32,6 +33,8 @@ public class FileLoader implements ILoader {
 		
 		this.path = path;
 		this.text = new StringBuilder();
+		
+		hasMoreData = true;
 	}
 	
 	/* (non-Javadoc)
@@ -39,7 +42,6 @@ public class FileLoader implements ILoader {
 	 */
 	@Override
 	public boolean load() {
-		
 		BufferedReader br = null;
 		String nl = System.getProperty("line.separator");
 		try {
@@ -64,6 +66,7 @@ public class FileLoader implements ILoader {
 			}
 		}
 		
+		hasMoreData = false;
 		return true;
 	}
 
@@ -72,8 +75,12 @@ public class FileLoader implements ILoader {
 	 */
 	@Override
 	public String getText() {
-
 		return this.text.toString();
+	}
+
+	@Override
+	public boolean hasMoreData() {
+		return hasMoreData;
 	}
 
 }

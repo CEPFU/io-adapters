@@ -21,6 +21,7 @@ public class URLLoader implements ILoader {
 
 	private String text;
 	private URL url;
+	private boolean hasMoreData;
 	
 	private static Logger logger = LogManager.getLogger(URLLoader.class);
 	
@@ -36,6 +37,7 @@ public class URLLoader implements ILoader {
 			logger.error("Malformed URL: ", e);
 		}
 		this.text = "";  // start with an empty string
+		hasMoreData = true;
 	}
 
 	/**
@@ -51,11 +53,13 @@ public class URLLoader implements ILoader {
 	        while ((inputLine = in.readLine()) != null)
 	            text += inputLine + "\n";
 	        in.close();
-	        
+	     
 	        return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
+		} finally {
+			hasMoreData = false;
 		}
 	}
 
@@ -65,5 +69,10 @@ public class URLLoader implements ILoader {
 	public String getText() {
 		
 		return this.text;
+	}
+
+	@Override
+	public boolean hasMoreData() {
+		return hasMoreData;
 	}
 }
