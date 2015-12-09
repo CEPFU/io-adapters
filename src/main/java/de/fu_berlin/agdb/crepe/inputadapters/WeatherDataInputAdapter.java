@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,41 +25,38 @@ public class WeatherDataInputAdapter implements IInputAdapter{
 	@Override
 	public void load(String text) {
 		if(text != null){
-			JSONArray eventArray = new JSONArray(text);
-			for(int i = 0; i < eventArray.length(); i++){
-				JSONObject arrayEntry = eventArray.getJSONObject(i);
-				
-				Map<String, IAttribute> attributes = new HashMap<String, IAttribute>();
-				
-				putLongIfExists(arrayEntry, "timestamp", attributes);
-				addStationMetaDataAttributes(arrayEntry, attributes);
-				putStringIfExists(arrayEntry, "dataType", attributes);
-				
-				putStringIfExists(arrayEntry, "date", attributes);
-				putDoubleIfExists(arrayEntry, "windChill", attributes);
-				putDoubleIfExists(arrayEntry, "windDirection", attributes);
-				putDoubleIfExists(arrayEntry, "windSpeed", attributes);
-				putDoubleIfExists(arrayEntry, "atmosphereHumidity", attributes);
-				putDoubleIfExists(arrayEntry, "atmospherePressure", attributes);
-				putDoubleIfExists(arrayEntry, "atmosphereRising", attributes);
-				putDoubleIfExists(arrayEntry, "atmosphereVisibility", attributes);
-				putStringIfExists(arrayEntry, "astronomySunrise", attributes);
-				putStringIfExists(arrayEntry, "astronomySunset", attributes);
-				putDoubleIfExists(arrayEntry, "temperature", attributes);
-				putDoubleIfExists(arrayEntry, "temperatureHigh", attributes);
-				putDoubleIfExists(arrayEntry, "temperatureLow", attributes);
-				
-				putIntIfExists(arrayEntry, "qualityLevel", attributes);
-				putDoubleIfExists(arrayEntry, "steamPressure", attributes);
-				putDoubleIfExists(arrayEntry, "cloudage", attributes);
-				putDoubleIfExists(arrayEntry, "minimumAirGroundTemperature", attributes);
-				putDoubleIfExists(arrayEntry, "maximumWindSpeed", attributes);
-				putDoubleIfExists(arrayEntry, "precipitationDepth", attributes);
-				putDoubleIfExists(arrayEntry, "sunshineDuration", attributes);
-				putDoubleIfExists(arrayEntry, "snowHeight", attributes);
-				
-				events.add(new Event(new Date(arrayEntry.getLong("timestamp")), attributes));
-			}
+			JSONObject arrayEntry = new JSONObject(text);
+			
+			Map<String, IAttribute> attributes = new HashMap<String, IAttribute>();
+			
+			putLongIfExists(arrayEntry, "timestamp", attributes);
+			addStationMetaDataAttributes(arrayEntry, attributes);
+			putStringIfExists(arrayEntry, "dataType", attributes);
+			
+			putStringIfExists(arrayEntry, "date", attributes);
+			putDoubleIfExists(arrayEntry, "windChill", attributes);
+			putDoubleIfExists(arrayEntry, "windDirection", attributes);
+			putDoubleIfExists(arrayEntry, "windSpeed", attributes);
+			putDoubleIfExists(arrayEntry, "atmosphereHumidity", attributes);
+			putDoubleIfExists(arrayEntry, "atmospherePressure", attributes);
+			putDoubleIfExists(arrayEntry, "atmosphereRising", attributes);
+			putDoubleIfExists(arrayEntry, "atmosphereVisibility", attributes);
+			putStringIfExists(arrayEntry, "astronomySunrise", attributes);
+			putStringIfExists(arrayEntry, "astronomySunset", attributes);
+			putDoubleIfExists(arrayEntry, "temperature", attributes);
+			putDoubleIfExists(arrayEntry, "temperatureHigh", attributes);
+			putDoubleIfExists(arrayEntry, "temperatureLow", attributes);
+			
+			putIntIfExists(arrayEntry, "qualityLevel", attributes);
+			putDoubleIfExists(arrayEntry, "steamPressure", attributes);
+			putDoubleIfExists(arrayEntry, "cloudage", attributes);
+			putDoubleIfExists(arrayEntry, "minimumAirGroundTemperature", attributes);
+			putDoubleIfExists(arrayEntry, "maximumWindSpeed", attributes);
+			putDoubleIfExists(arrayEntry, "precipitationDepth", attributes);
+			putDoubleIfExists(arrayEntry, "sunshineDuration", attributes);
+			putDoubleIfExists(arrayEntry, "snowHeight", attributes);
+			
+			events.add(new Event(new Date(arrayEntry.getLong("timestamp")), attributes));
 		}
 	}
 	
